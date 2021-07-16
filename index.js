@@ -1,16 +1,18 @@
+const https = require('https');
+const fs = require('fs');
 const app = require('express')();
-
 const auth = require('http-auth');
-//const bodyParser = require('body-parser');
-// app.use(bodyParser.json()); // Soporta json encoded bodies
-// app.use(bodyParser.urlencoded({ // Soporta encoded bodies
-//     extended: true
-// }));
 
 var digest = auth.digest({
     realm: 'Sample',
     file: __dirname + "/users.htdigest"
 });
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+  };
+
+https.createServer(options,app);
 
 app.get('/',digest.check((req,res)=>{
     console.log(req.auth);
@@ -20,3 +22,11 @@ app.get('/',digest.check((req,res)=>{
 app.listen(3001, () => {
     console.log('running');
 });
+
+
+
+
+
+
+
+
