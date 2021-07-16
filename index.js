@@ -35,8 +35,8 @@ var digest = auth.digest({
 });
 
 var options = {
-  key: fs.readFileSync('.pem'),
-  cert: fs.readFileSync('.cert')
+  key: fs.readFileSync('client-key.pem'),
+  cert: fs.readFileSync('client-cert.pem')
 };
 
 var app = express();
