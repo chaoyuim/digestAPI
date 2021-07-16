@@ -14,7 +14,7 @@ var digest = auth.digest({
 
 app.get('/',digest.check((req,res)=>{
     console.log(req.auth);
-    res.send('helloworld');
+    res.send({ username: 'whatever json' });
 }));
 // Levantamos servidor
 app.listen(3001, () => {
