@@ -49,7 +49,9 @@ app.get('/',digest.check((req,res)=>{
     res.send({ username: 'whatever json' });
 }));
 
-https.listen(3001);
+app.listen(3001,()=>{
+    console.log('running on port 30001');
+});
 
 
 
