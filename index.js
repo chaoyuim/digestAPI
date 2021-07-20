@@ -1,46 +1,32 @@
-// const https = require('https');
-// const fs = require('fs');
-// const app = require('express')();
+const express = require('express')
+const app = express()
+
+app.get('/', function (req, res) {
+  res.send('Hello World!')
+})
+
+app.listen(3000, function() {
+  console.log('Hello World app listening on port 3000!');
+})
+
+// var express = require('express');
+// var http = require('http');
 // const auth = require('http-auth');
 
 // var digest = auth.digest({
 //     realm: 'Sample',
 //     file: __dirname + "/users.htdigest"
 // });
-// const options = {
-//     key: fs.readFileSync('key.pem'),
-//     cert: fs.readFileSync('cert.pem')
-//   };
-
-// https.createServer(options,app);
-
+// var app = express();
+// app.use(digest.check());
+// http.createServer(app);
 // app.get('/',digest.check((req,res)=>{
 //     console.log(req.auth);
 //     res.send({ username: 'whatever json' });
 // }));
-// // Levantamos servidor
-// app.listen(3001, () => {
-//     console.log('running');
+// app.listen(3001,()=>{
+//     console.log('running on port 30001');
 // });
-
-var express = require('express');
-var http = require('http');
-const auth = require('http-auth');
-
-var digest = auth.digest({
-    realm: 'Sample',
-    file: __dirname + "/users.htdigest"
-});
-var app = express();
-app.use(digest.check());
-http.createServer(app);
-app.get('/',digest.check((req,res)=>{
-    console.log(req.auth);
-    res.send({ username: 'whatever json' });
-}));
-app.listen(3001,()=>{
-    console.log('running on port 30001');
-});
 
 
 
