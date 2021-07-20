@@ -24,31 +24,20 @@
 // });
 
 var express = require('express');
-var https = require('https');
 var http = require('http');
-var fs = require('fs');
 const auth = require('http-auth');
 
 var digest = auth.digest({
     realm: 'Sample',
     file: __dirname + "/users.htdigest"
 });
-
-var options = {
-  key: fs.readFileSync('client-key.pem'),
-  cert: fs.readFileSync('client-cert.pem')
-};
-
 var app = express();
 app.use(digest.check());
-
-https.createServer(options, app);
-
+http.createServer(app);
 app.get('/',digest.check((req,res)=>{
     console.log(req.auth);
     res.send({ username: 'whatever json' });
 }));
-
 app.listen(3001,()=>{
     console.log('running on port 30001');
 });
