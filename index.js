@@ -4,6 +4,9 @@ const app = express()
 app.get('/', function (req, res) {
   res.send('Hello World!')
 })
+app.get('/app2', function (req, res) {
+    res.send('Hello World! app2')
+})
 
 app.listen(3000, 'localhost',function() {
   console.log('Hello World app listening on port 3000!');
